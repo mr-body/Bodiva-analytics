@@ -1,283 +1,197 @@
-Welcome to your new TanStack Start app!
+# Budiva Analytics
 
-# Getting Started
+Dashboard web para visualização e análise do mercado de capitais angolano, inspirado na BODIVA — Bolsa de Dívida e Valores de Angola.
 
-To run this application:
+A aplicação apresenta uma interface de nível profissional para acompanhar cotações, índices, volume de negociação, livro de ordens, mapa sectorial, curva de rendimentos e profundidade de mercado.
+
+> **Estado do projecto:** protótipo/demo visual. Os dados apresentados actualmente são gerados localmente e simulados no frontend; não representam cotações reais nem devem ser utilizados para decisões financeiras.
+
+## Funcionalidades
+
+- Ticker horizontal com actualização visual das cotações.
+- Índices de mercado e variações percentuais.
+- Watchlist de acções e obrigações.
+- Gráfico interactivo de preços e volume.
+- Livro de ordens com ofertas de compra e venda.
+- Tabela de resumo dos mercados.
+- Mapa de desempenho por sector.
+- Curva de rendimentos de obrigações do tesouro.
+- Gráfico de profundidade de mercado.
+- Layout responsivo para desktop e dispositivos móveis.
+- Animações e transições com Framer Motion.
+- Formatação de valores em português (`pt-PT`) e moeda AOA.
+
+## Tecnologias
+
+- [React](https://react.dev/) 19
+- [TypeScript](https://www.typescriptlang.org/)
+- [TanStack Start](https://tanstack.com/start)
+- [TanStack Router](https://tanstack.com/router)
+- [Vite](https://vite.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Recharts](https://recharts.org/)
+- [Framer Motion](https://motion.dev/)
+- [Lucide React](https://lucide.dev/)
+- [Prisma](https://www.prisma.io/) com PostgreSQL
+- [Storybook](https://storybook.js.org/)
+- [Vitest](https://vitest.dev/) e Playwright
+- [Nitro](https://nitro.build/) para deploy do servidor
+
+## Pré-requisitos
+
+- Node.js 20 ou superior
+- npm ou pnpm
+- PostgreSQL, caso pretenda utilizar as funcionalidades de base de dados
+
+## Instalação
+
+Clone o repositório e instale as dependências:
 
 ```bash
+git clone https://github.com/mr-body/Budiva-analytics.git
+cd Budiva-analytics
 npm install
+```
+
+## Desenvolvimento
+
+Inicie o servidor de desenvolvimento:
+
+```bash
 npm run dev
 ```
 
-# Building For Production
+A aplicação ficará disponível em:
 
-To build this application for production:
+```text
+http://localhost:3000
+```
+
+## Variáveis de ambiente
+
+Para utilizar o Prisma e a ligação à base de dados, crie um ficheiro `.env.local` na raiz do projecto:
+
+```env
+DATABASE_URL="postgresql://utilizador:palavra-passe@localhost:5432/budiva_analytics"
+```
+
+O ficheiro `.env.local` não deve ser versionado. Nunca inclua credenciais reais no repositório.
+
+## Base de dados
+
+O projecto está preparado para utilizar Prisma com PostgreSQL. Os comandos disponíveis são:
+
+```bash
+# Gerar o Prisma Client
+npm run db:generate
+
+# Aplicar o schema actual à base de dados
+npm run db:push
+
+# Criar e aplicar uma migration durante o desenvolvimento
+npm run db:migrate
+
+# Abrir o Prisma Studio
+npm run db:studio
+
+# Executar o seed da base de dados
+npm run db:seed
+```
+
+O schema actual contém uma entidade `Todo` de exemplo. A camada de dados pode ser expandida para armazenar utilizadores, instrumentos financeiros, cotações, ordens e histórico de mercado.
+
+## Build de produção
+
+Para gerar a build de produção:
 
 ```bash
 npm run build
 ```
 
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Remove `@tailwindcss/vite` and `tailwindcss` from `package.json`
-
-
-## Deploy with Nitro
-
-This project uses Nitro as a generic server adapter, so it can run on any Node-compatible host.
+Para pré-visualizar a build localmente:
 
 ```bash
-npm run build
+npm run preview
+```
+
+O projecto utiliza Nitro como servidor. Depois da build, pode iniciar o servidor com:
+
+```bash
 node dist/server/index.mjs
 ```
 
-The build output is a self-contained Node server. To deploy, push the `dist/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
+## Storybook
 
-For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tuning, see https://v3.nitro.build/deploy.
-
-
-# TanStack Chat Application
-
-Am example chat application built with TanStack Start, TanStack Store, and Claude AI.
-
-## .env Updates
-
-```env
-ANTHROPIC_API_KEY=your_anthropic_api_key
-```
-
-## ✨ Features
-
-### AI Capabilities
-- 🤖 Powered by Claude 3.5 Sonnet 
-- 📝 Rich markdown formatting with syntax highlighting
-- 🎯 Customizable system prompts for tailored AI behavior
-- 🔄 Real-time message updates and streaming responses (coming soon)
-
-### User Experience
-- 🎨 Modern UI with Tailwind CSS and Lucide icons
-- 🔍 Conversation management and history
-- 🔐 Secure API key management
-- 📋 Markdown rendering with code highlighting
-
-### Technical Features
-- 📦 Centralized state management with TanStack Store
-- 🔌 Extensible architecture for multiple AI providers
-- 🛠️ TypeScript for type safety
-
-## Architecture
-
-### Tech Stack
-- **Frontend Framework**: TanStack Start
-- **Routing**: TanStack Router
-- **State Management**: TanStack Store
-- **Styling**: Tailwind CSS
-- **AI Integration**: Anthropic's Claude API
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
+Para iniciar o Storybook:
 
 ```bash
-pnpm dlx shadcn@latest add button
+npm run storybook
 ```
 
+Para gerar a build estática do Storybook:
 
-## Setting up Better Auth
+```bash
+npm run build-storybook
+```
 
-1. Generate and set the `BETTER_AUTH_SECRET` environment variable in your `.env.local`:
+## Estrutura principal
+
+```text
+.
+├── prisma/              # Schema, migrations e seed da base de dados
+├── public/               # Ficheiros públicos
+├── src/
+│   ├── components/       # Componentes reutilizáveis
+│   ├── data/             # Dados da aplicação
+│   ├── hooks/            # React hooks personalizados
+│   ├── integrations/     # Integrações externas
+│   ├── lib/              # Utilitários e configurações
+│   ├── routes/           # Rotas TanStack Router
+│   ├── stories/          # Stories do Storybook
+│   └── styles.css        # Estilos globais
+├── package.json
+├── prisma.config.ts
+├── vite.config.ts
+└── README.md
+```
+
+## Roadmap
+
+- [ ] Substituir os dados simulados por uma API de mercado.
+- [ ] Adicionar autenticação e perfis de utilizador.
+- [ ] Persistir watchlists e preferências.
+- [ ] Integrar dados históricos reais.
+- [ ] Adicionar filtros e pesquisa funcional.
+- [ ] Implementar exportação de relatórios para Excel/PDF.
+- [ ] Criar testes automatizados para os principais componentes.
+- [ ] Preparar deploy para produção.
+
+## Contribuição
+
+Contribuições são bem-vindas:
+
+1. Faça um fork do projecto.
+2. Crie uma branch para a sua alteração:
 
    ```bash
-   npx -y @better-auth/cli secret
+   git checkout -b feature/minha-alteracao
    ```
 
-2. Visit the [Better Auth documentation](https://www.better-auth.com) to unlock the full potential of authentication in your app.
+3. Faça as alterações e valide localmente.
+4. Crie um commit descritivo:
 
-### Adding a Database (Optional)
+   ```bash
+   git commit -m "feat: adiciona nova funcionalidade"
+   ```
 
-Better Auth can work in stateless mode, but to persist user data, add a database:
+5. Envie a branch e abra um Pull Request.
 
-```typescript
-// src/lib/auth.ts
-import { betterAuth } from "better-auth";
-import { Pool } from "pg";
+## Licença
 
-export const auth = betterAuth({
-  database: new Pool({
-    connectionString: process.env.DATABASE_URL,
-  }),
-  // ... rest of config
-});
-```
+Este projecto ainda não possui uma licença definida. Adicione uma licença ao repositório antes de distribuir ou reutilizar o código em contexto comercial.
 
-Then run migrations:
+## Autor
 
-```bash
-npx -y @better-auth/cli migrate
-```
+Desenvolvido por [mr-body](https://github.com/mr-body).
 
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
-# Budiva-analytics
+Repositório: [github.com/mr-body/Budiva-analytics](https://github.com/mr-body/Budiva-analytics)
